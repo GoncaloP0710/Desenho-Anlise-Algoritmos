@@ -1,0 +1,21 @@
+strict graph "" {
+	1	[width=0.5];
+	2	[width=0.5];
+	1 -- 2	[label=20,
+		weight=20];
+	7	[width=0.5];
+	1 -- 7	[label=20,
+		weight=20];
+	4	[width=0.5];
+	4 -- 7	[label=20,
+		weight=20];
+	3	[width=0.5];
+	4 -- 3	[label=10,
+		weight=10];
+	5	[width=0.5];
+	7 -- 5	[label=30,
+		weight=30];
+	6	[width=0.5];
+	3 -- 6	[label=10,
+		weight=10];
+}
