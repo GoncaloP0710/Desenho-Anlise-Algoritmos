@@ -45,6 +45,7 @@ python-dateutil==2.9.0.post0
 pyzmq==26.2.1
 referencing==0.36.2
 rpds-py==0.22.3
+scipy==1.15.2
 six==1.17.0
 stack-data==0.6.3
 tornado==6.4.2
