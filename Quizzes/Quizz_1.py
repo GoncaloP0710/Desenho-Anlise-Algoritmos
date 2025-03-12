@@ -46,7 +46,9 @@ def sum_powers(n):
                 power += 1
             power = default_power # reset power to 2 for the next base
             base += 1 # try the next base
-    
+
+    if n < 4:
+        return []
     res = []
     power, base = 2, 2 # set the default values for power and base
     backtrack(n, '', 0, base, power, power)
