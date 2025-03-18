@@ -37,12 +37,14 @@ def sum_powers(n):
         if path_value > n:  # sum is too big
             return
         if path_value == n:  # found a valid solution
-            res.append(path[3:])  # remove the first ' + ' from the path
+            res.append(" + ".join(sorted(path)))  # remove the first ' + ' from the path
             return
         
         while (base ** default_power) + path_value <= n: # check if the base is not too big already        
             while (base ** power) + path_value <= n: # check if the power is not too big already
-                backtrack(n, path + f' + {base}^{power}', path_value + (base ** power), base, power+1, default_power)
+                path.append(f"{base}^{power}")
+                backtrack(n, path, path_value + (base ** power), base, power+1, default_power)
+                path.pop()
                 power += 1
             power = default_power # reset power to 2 for the next base
             base += 1 # try the next base
@@ -51,5 +53,7 @@ def sum_powers(n):
         return []
     res = []
     power, base = 2, 2 # set the default values for power and base
-    backtrack(n, '', 0, base, power, power)
+    backtrack(n, [], 0, base, power, power)
     return sorted(res)
+
+print(sum_powers(500))
