@@ -42,24 +42,25 @@ def solve(file_name):
         visited = set()
         while frontier:
             (row, col), moves, step_size = frontier.popleft()
-            if (row, col, step_size) in visited:
+            if (row, col, step_size) in visited: # skip visited positions
                 continue
             visited.add((row, col, step_size))
-            if (row, col) == end_position:
-                return moves
-            for dr, dc in directions:
+
+            for rowMove, colMove in directions:
                 r, c = row, col
-                r += dr * step_size
-                c += dc * step_size
-                if r < 0 or r >= len(maze) or c < 0 or c >= len(maze[0]) or maze[r][c] == '#':
-                    continue
-                if (r, c) == end_position:
-                    return moves + 1
-                if (r, c, step_size % 3 + 1) not in visited:
-                    frontier.append(((r, c), moves + 1, step_size % 3 + 1))
+                for _ in range(step_size): # check if move is valid
+                    r += rowMove
+                    c += colMove
+                    if r < 0 or r >= len(maze) or c < 0 or c >= len(maze[0]) or maze[r][c] == '#':
+                        break
+                else:
+                    if (r, c) == end_position: # solution found
+                        return moves + 1
+                    if (r, c, step_size % 3 + 1) not in visited:
+                        frontier.append(((r, c), moves + 1, step_size % 3 + 1))
         return 'NO'
     
-    frontier = deque([(start_position, 0, 1)])  # initialize frontier with start position, move count, and step size
+    frontier = deque([(start_position, 0, 1)])  # initialize frontier with start position, move count, step size, and path
     return bfs(end_position, frontier)
 
 print(solve('./input1.txt'))  # Example usage
